@@ -138,37 +138,28 @@ class Main extends PluginBase implements Listener{
 		$this->SetStatus = array();
 		$this->all = 0;
 		$this->config->save();
-		if(!($this->money = $pm->getPlugin("EconomyAPI"))
-        && !($this->money = $pm->getPlugin("PocketMoney")))			{
+		if(!($this->money = $pm->getPlugin("EconomyAPI")) && !($this->money = $pm->getPlugin("PocketMoney"))){
 			$this->getServer()->getLogger()->info(TextFormat::RED. "[HG] Please install EconomyAPI or PocketMoney for this to work!");
-		} else {
-			$this->getServer()->getLogger()->info(TextFormat::DARK_BLUE."[HG] Using ".
-											 TextFormat::YELLOW.$this->money->getName()." v".
-											 $this->money->getDescription()->getVersion())." as the money system.";
-											 }
+		}else{
+			$this->getServer()->getLogger()->info(TextFormat::DARK_BLUE."[HG] Using ".TextFormat::YELLOW.$this->money->getName()." v".$this->money->getDescription()->getVersion())." as the money system.";
+		}
 		$this->getServer()->getLogger()->info(TextFormat::BLUE."[HG] Everything has been loaded!");
-	
 	}
 	
-	public function onCommand(CommandSender $sender, Command $command, $label, array $args)
-	{
-		if($command->getName()=="lobby")
-		{
-			if($this->gameStatus>=2)
-			{
+	public function onCommand(CommandSender $sender, Command $command, $label, array $args){
+		if($command->getName()=="lobby" or "hub" ){
+			if($this->gameStatus>=2){
 				$sender->sendMessage("The game has already started. You cannot go back to the lobby.");
 				return;
 			}
-			if(isset($this->players[$sender->getName()]))
-			{	
+			if(isset($this->players[$sender->getName()])){	
 				unset($this->players[$sender->getName()]);
 				$sender->setLevel($this->signlevel);
 				$sender->teleport($this->signlevel->getSpawnLocation());
-				$sender->sendMessage(TextFormat::GREEN."Teleporting to lobby...");
+				$sender->sendMessage(TextFormat::GREEN."Teleporting to Lobby...");
 				$this->sendToAll(TextFormat::RED."Player ".$sender->getName()." left the match.");
 				$this->changeStatusSign();
-				if($this->gameStatus == 1 && count($this->players)<2)
-				{
+				if($this->gameStatus == 1 && count($this->players)<2){
 					$this->gameStatus=0;
 					$this->lastTime=0;
 					$this->sendToAll("There aren't enough players. Countdown was stopped.");
@@ -180,16 +171,15 @@ class Main extends PluginBase implements Listener{
 						unset($p,$pl);
 					}*/
 				}
-			}
-			else
-			{
+			}else{
 				$sender->sendMessage(TextFormat::RED . "You are not in a match.");
 			}
 			return true;
 		}
-		if(!isset($args[0])){unset($sender,$cmd,$label,$args);return false;};
-		switch ($args[0])
-		{
+		if(!isset($args[0])){
+			unset($sender,$cmd,$label,$args);
+			return false;};
+		switch ($args[0]){
 		case "stats":
 			if($sender->hasPermission("hg.command.stats") or $sender->hasPermission("hg.command") or $sender->hasPermission("hg")){
                                 if(!(isset($args[1]))){
@@ -213,47 +203,13 @@ class Main extends PluginBase implements Listener{
 				break;
                                 }
 		case "set":
-			if($this->config->exists("lastpos"))
-			{
-				$sender->sendMessage("The game was set before. Please use /fsg remove and try again.");
-			}
-			else
-			{
+			if($this->config->exists("lastpos")){
+				$sender->sendMessage("The game was set before. Please use /sg remove and try again.");
+			}else{
 				$name=$sender->getName();
 				$this->SetStatus[$name]=0;
 				$sender->sendMessage("Please tap the status sign.");
 			}
-			break;
-		case "remove":
-			$this->config->remove("sign");
-			$this->config->remove("pos1");
-			$this->config->remove("pos2");
-			$this->config->remove("pos3");
-			$this->config->remove("pos4");
-			$this->config->remove("pos5");
-			$this->config->remove("pos6");
-			$this->config->remove("pos7");
-			$this->config->remove("pos8");
-			$this->config->remove("pos9");
-			$this->config->remove("pos10");
-			$this->config->remove("pos11");
-			$this->config->remove("pos12");
-			$this->config->remove("pos13");
-			$this->config->remove("pos14");
-			$this->config->remove("pos15");
-			$this->config->remove("pos16");
-			$this->config->remove("pos17");
-			$this->config->remove("pos18");
-			$this->config->remove("pos19");
-			$this->config->remove("pos20");
-			$this->config->remove("pos21");
-			$this->config->remove("pos22");
-			$this->config->remove("pos23");
-			$this->config->remove("pos24");
-			$this->config->remove("lastpos");
-			$this->config->save();
-			unset($this->sign,$this->pos1,$this->pos2,$this->pos3,$this->pos4,$this->pos5,$this->pos6,$this->pos7,$this->pos8,$this->pos9,$this->pos10,$this->pos11,$this->pos12,$this->pos13,$this->pos14,$this->pos15,$this->pos16,$this->pos17,$this->pos18,$this->pos19,$this->pos20,$this->pos21,$this->pos22,$this->pos23,$this->pos24,$this->lastpos);
-			$sender->sendMessage(TextFormat::GREEN . "Game settings successfully removed.");
 			break;
 		case "start":
 			$this->sendToAll("Match has been started forcefully.");
@@ -265,8 +221,7 @@ class Main extends PluginBase implements Listener{
 			@mkdir($this->getDataFolder(), 0777, true);
 			$this->points = new Config($this->getDataFolder()."points.yml", Config::YAML);
 			$this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML, array());
-			if($this->config->exists("lastpos"))
-			{
+			if($this->config->exists("lastpos")){
 				$this->sign = $this->config->get("sign");
 				$this->pos1 = $this->config->get("pos1");
 				$this->pos2 = $this->config->get("pos2");
@@ -322,20 +277,16 @@ class Main extends PluginBase implements Listener{
 				$this->pos24 = new Vector3($this->pos24["x"]+0.5,$this->pos24["y"],$this->pos24["z"]+0.5);
 				$this->lastpos = new Vector3($this->lastpos["x"]+0.5,$this->lastpos["y"],$this->lastpos["z"]+0.5);
 			}
-			if(!$this->config->exists("endTime"))
-			{
+			if(!$this->config->exists("endTime")){
 				$this->config->set("endTime",600);
 			}
-			if(!$this->config->exists("gameTime"))
-			{
+			if(!$this->config->exists("gameTime")){
 				$this->config->set("gameTime",300);
 			}
-			if(!$this->config->exists("prefix"))
-			{
+			if(!$this->config->exists("prefix")){
 				$this->config->set("prefix","[Prefix here]");
 			}
-			if(!$this->config->exists("waitTime"))
-			{
+			if(!$this->config->exists("waitTime")){
 				$this->config->set("waitTime",180);
 			}
 			$this->endTime = (int)$this->config->get("endTime");
@@ -420,18 +371,14 @@ class Main extends PluginBase implements Listener{
 		unset($sign,$block,$event);
 	}
 	
-	public function onPlayerCommand(PlayerCommandPreprocessEvent $event)
-	{
-		if(!$this->PlayerIsInGame($event->getPlayer()->getName()) || $event->getPlayer()->isOp() || substr($event->getMessage(),0,1) != "/")
-		{
+	public function onPlayerCommand(PlayerCommandPreprocessEvent $event){
+		if(!$this->PlayerIsInGame($event->getPlayer()->getName()) || $event->getPlayer()->isOp() || substr($event->getMessage(),0,1) != "/"){
 			unset($event);
 			return;
 		}
-		switch(strtolower(explode(" ",$event->getMessage())[0]))
-		{
+		switch(strtolower(explode(" ",$event->getMessage())[0])){
 		case "/kill":
 		case "/lobby":
-			
 			break;
 		default:
 			$event->setCancelled();
@@ -442,45 +389,34 @@ class Main extends PluginBase implements Listener{
 		unset($event);
 	}
 	
-	public function onDamage(EntityDamageEvent $event)
-	{
+	public function onDamage(EntityDamageEvent $event){
 		$player = $event->getEntity();
-		if ($event instanceof EntityDamageByEntityEvent)
-		{
-        	$player = $event->getEntity();
-        	$killer = $event->getDamager();
-			if($player instanceof Player && $killer instanceof Player)
-			{
-		    	if($this->PlayerIsInGame($player->getName()) && ($this->gameStatus == 2 || $this->gameStatus == 1))
-		    	{
-		    		$event->setCancelled();
-		    	}
-		    	if($this->PlayerIsInGame($player->getName()) && !$this->PlayerIsInGame($killer->getName()) && !$killer->isOp())
-		    	{
+		if ($event instanceof EntityDamageByEntityEvent){
+        		$player = $event->getEntity();
+        		$killer = $event->getDamager();
+			if($player instanceof Player && $killer instanceof Player){
+		    		if($this->PlayerIsInGame($player->getName()) && ($this->gameStatus == 2 || $this->gameStatus == 1)){
+		    			$event->setCancelled();
+		    		}
+		    	if($this->PlayerIsInGame($player->getName()) && !$this->PlayerIsInGame($killer->getName()) && !$killer->isOp()){
 		    		$event->setCancelled();
 		    		$killer->sendMessage("You cannot attack yet.");
-		    		$killer->kill();
 		    	}
 		    }
 		}
-		
 		unset($player,$killer,$event);
 	}
 	
-	public function PlayerIsInGame($name)
-	{
+	public function PlayerIsInGame($name){
 		return isset($this->players[$name]);
 	}
 	
 	public function PlayerDeath(PlayerDeathEvent $event){
-		if($this->gameStatus == 3 || $this->gameStatus == 4)
-		{
-			if(isset($this->players[$event->getEntity()->getName()]))
-			{
+		if($this->gameStatus == 3 or $this->gameStatus == 4){
+			if(isset($this->players[$event->getEntity()->getName()])){
 				$this->ClearInv($event->getEntity());
 				unset($this->players[$event->getEntity()->getName()]);
-				if(count($this->players) > 1)
-				{
+				if(count($this->players) > 1){
 					$this->sendToAll(" {$event->getEntity()->getName()} died.");
 					$this->sendToAll("Players: ".count($this->players));
 					$this->sendToAll("Time remaining: ".$this->lastTime." seconds.");
@@ -490,105 +426,29 @@ class Main extends PluginBase implements Listener{
 			
 		}
 	}
-/*public function onPlayerDie(PlayerDeathEvent $event){
-	          $p = $event->getPlayer();
-  $causeId = $p->getLastDamageCause()->getCause();
-  switch($causeId){
-    case EntityDamageEvent::CAUSE_DROWNING:
-      $text = "You drowned!";
-      break;
-    case EntityDamageEvent::CAUSE_FALL:
-      $text = "You fell from a high place!";
-      break;
-    case EntityDamageEvent::CAUSE_LAVA:
-      $text = "You tried to swim in lava!";
-      break;
-    case EntityDamageEvent::CAUSE_FIRE:
-      $text = "You burned to death!";
-      break;
-    case EntityDamageEvent::CAUSE_FIRE_TICK:
-      $text = "You burned to death!";
-      break;
-    case EntityDamageEvent::CAUSE_SUICIDE:
-      $text = "You died!"
-      break;
-    case EntityDamageEvent::CAUSE_SUFFOCATION: 
-      $text = "You suffocated in a wall!"
-      break;
-    case EntityDamageEvent::CAUSE_CONTACT:
-	if($cause instanceof EntityDamageByBlockEvent){
-	        if($cause->getDamager()->getId() === Block::CACTUS){
-		       $text = "You got pricked to death!";
-		}
-	}
-	break;
-    case EntityDamageEvent::CAUSE_PROJECTILE:
-	if($cause instanceof EntityDamageByEntityEvent){
-	$e = $cause->getDamager();
-		if($e instanceof Living){
-			$text = "You were shot by ".$params[]."!";
-			$params[] = $e->getName();
-			break;
-		        }else{
-			$params[] = "Unknown";
-		}
-	}
-	break;
-    case EntityDamageEvent::CAUSE_ENTITY_ATTACK:
-        if($cause instanceof EntityDamageByEntityEvent){
-                if($e instanceof Living){
-                        $text = "You were slain by ".$params[]."!";
-                        $param[] = $e->getName();
-                        break;
-                        }else{
-                        $params[] = "Unknown";
-		}
-	}
-	break;
-    case EntityDamageEvent::CAUSE_BLOCK_EXPLOSION:
-    case EntityDamageEvent::CAUSE_ENTITY_EXPLOSION:
-		if($cause instanceof EntityDamageByEntityEvent){
-		$e = $cause->getDamager();
-			if($e instanceof Living){
-				$text = "You were blown up by ".$params[]."!";
-				$params[] = $e->getName();
-			}
-		}else{
-		$text = "You blew up!";
-	}
-	break;	
-  }
-  if(isset($text)) $p->sendPopup($text);
-	}*/
 	public function sendTip($msg){
-		foreach($this->players as $pl)
-		{
-			$this->getServer()->getPlayer($pl["id"])->sendTip($msg);
+		foreach($this->players as $pl){
+			$this->getServer()->getPlayer($pl["id"])->sendPopup($msg);
 		}
 		$this->getServer()->getLogger()->info($msg);
 		unset($pl,$msg);
 	}
 	
 	public function gameTimber(){
-		if(!isset($this->lastpos) || $this->lastpos == array())
-		{
+		if(!isset($this->lastpos) || $this->lastpos == array()){
 			return;
 		}
-		if(!$this->signlevel instanceof Level)
-		{
+		if(!$this->signlevel instanceof Level){
 			$this->level = $this->getServer()->getLevelByName($this->config->get("pos1")["level"]);
 			$this->signlevel = $this->getServer()->getLevelByName($this->config->get("sign")["level"]);
-			if(!$this->signlevel instanceof Level)
-			{
+			if(!$this->signlevel instanceof Level){
 				return;
 			}
 		}
 		$this->changeStatusSign();
-		if($this->gameStatus == 0)
-		{
+		if($this->gameStatus == 0){
 			$i = 0;
-			foreach($this->players as $key => $val)
-			{
+			foreach($this->players as $key => $val){
 				$i++;
 				$p = $this->getServer()->getPlayer($val["id"]);
 				//echo($i."\n");
@@ -597,12 +457,10 @@ class Main extends PluginBase implements Listener{
 				unset($p);
 			}
 		}
-		if($this->gameStatus == 1)
-		{
+		if($this->gameStatus == 1){
 			$this->lastTime--;
 			$i = 0;
-			foreach($this->players as $key => $val)
-			{
+			foreach($this->players as $key => $val){
 				$i++;
 				$p = $this->getServer()->getPlayer($val["id"]);
 				//echo($i."\n");
@@ -610,8 +468,7 @@ class Main extends PluginBase implements Listener{
 				eval("\$p->teleport(\$this->pos".$i.");");
 				unset($p);
 			}
-			switch($this->lastTime)
-			{
+			switch($this->lastTime){
 			case 1:
 			case 2:
 			case 3:
@@ -645,8 +502,7 @@ class Main extends PluginBase implements Listener{
 				$this->sendTip(TextFormat::GREEN."The match has started.");
 				$this->lastTime = $this->godTime;
 				$this->resetChest();
-				foreach($this->players as $key => $val)
-				{
+				foreach($this->players as $key => $val){
 					$p=$this->getServer()->getPlayer($val["id"]);
 					$p->setMaxHealth(25);
 					$p->setHealth(25);
@@ -656,24 +512,19 @@ class Main extends PluginBase implements Listener{
 				break;
 			}
 		}
-		if($this->gameStatus == 2)
-		{
+		if($this->gameStatus == 2){
 			$this->lastTime--;
-			if($this->lastTime <= 0)
-			{
+			if($this->lastTime <= 0){
 				$this->gameStatus = 3;
 				$this->sendToAll(TextFormat::GREEN."Chests have been refilled!");
 				$this->lastTime = $this->gameTime;
 				$this->resetChest();
 			}
 		}
-		if($this->gameStatus == 3 || $this->gameStatus == 4)
-		{
-			if(count($this->players) == 1)
-			{
+		if($this->gameStatus == 3 || $this->gameStatus == 4){
+			if(count($this->players) == 1){
 				$this->sendToAll(TextFormat::GREEN."Congratulations! You have won the game.");
-				foreach($this->players as &$pl)
-				{
+				foreach($this->players as &$pl){
 					$p = $this->getServer()->getPlayer($pl["id"]);
 					Server::getInstance()->broadcastMessage(TextFormat::GREEN."" .$p->getName(). " won an HG match!");
 					$p->setLevel($this->signlevel);
@@ -689,8 +540,7 @@ class Main extends PluginBase implements Listener{
 				$this->lastTime = 0;
 				return;
 			}
-			else if(count($this->players) == 0)
-			{
+			else if(count($this->players) == 0){
 				Server::getInstance()->broadcastMessage("The match has ended.");
 				$this->gameStatus = 0;
 				$this->lastTime = 0;
@@ -699,11 +549,9 @@ class Main extends PluginBase implements Listener{
 				return;
 			}
 		}
-		if($this->gameStatus == 3)
-		{
+		if($this->gameStatus == 3){
 			$this->lastTime--;
-			switch($this->lastTime)
-			{
+			switch($this->lastTime){
 			case 1:
 			case 2:
 			case 3:
@@ -716,8 +564,7 @@ class Main extends PluginBase implements Listener{
 				break;
 			case 0:
 				$this->sendToAll(TextFormat::YELLOW."The deathmatch has started. May the best one win.");
-				foreach($this->players as $pl)
-				{
+				foreach($this->players as $pl){
 					$p = $this->getServer()->getPlayer($pl["id"]);
 					$p->setLevel($this->level);
 					$p->teleport($this->lastpos);
@@ -728,11 +575,9 @@ class Main extends PluginBase implements Listener{
 				break;
 			}
 		}
-		if($this->gameStatus == 4)
-		{
+		if($this->gameStatus == 4){
 			$this->lastTime--;
-			switch($this->lastTime)
-			{
+			switch($this->lastTime){
 			case 1:
 			case 2:
 			case 3:
@@ -750,8 +595,7 @@ class Main extends PluginBase implements Listener{
 			case 0:
 				$this->sendToAll("The match has ended.");
 				Server::getInstance()->broadcastMessage("The match has ended.");
-				foreach($this->players as $pl)
-				{
+				foreach($this->players as $pl){
 					$p = $this->getServer()->getPlayer($pl["id"]);
 					$p->setLevel($this->signlevel);
 					$p->teleport($this->signlevel->getSpawnLocation());
@@ -794,32 +638,25 @@ class Main extends PluginBase implements Listener{
 		unset($name,$money);
 	}
 	
-	public function killRate()
-	{
+	public function killRate(){
 		KillRate::getInstance()->stats($pl,$money);
 	}
 	
-	public function resetChest()
-	{
+	public function resetChest(){
 		ResetChest::getInstance()->ResetChest();
 	}
 	
-	public function clearChest()
-	{
+	public function clearChest(){
 		ResetChest::getInstance()->ClearChest();
 	}
 	
-	public function changeStatusSign()
-	{
-		if(!isset($this->sign))
-		{
+	public function changeStatusSign(){
+		if(!isset($this->sign)){
 			return;
 		}
 		$sign = $this->signlevel->getTile($this->sign);
-		if($sign instanceof Sign)
-		{
-			switch($this->gameStatus)
-			{
+		if($sign instanceof Sign){
+			switch($this->gameStatus){
 			case 0:
 				$sign->setText("[HG]","[Join]","Players: ".count($this->players),"");
 				break;
@@ -844,13 +681,10 @@ class Main extends PluginBase implements Listener{
 		$username = $player->getName();
 		$block = $event->getBlock();
 		$levelname = $player->getLevel()->getFolderName();
-		if(isset($this->SetStatus[$username]))
-		{
-			switch ($this->SetStatus[$username])
-			{
+		if(isset($this->SetStatus[$username])){
+			switch ($this->SetStatus[$username]){
 			case 0:
-				if($event->getBlock()->getID() != 63 && $event->getBlock()->getID() != 68)
-				{
+				if($event->getBlock()->getID() != 63 && $event->getBlock()->getID() != 68){
 					$player->sendMessage(TextFormat::GREEN."[HG] please choose a sign to click on");
 					return;
 				}
@@ -1194,90 +1028,68 @@ class Main extends PluginBase implements Listener{
 				$player->sendMessage(TextFormat::GREEN."All settings completed and you can start a game now.");
 				$this->level = $this->getServer()->getLevelByName($this->config->get("pos1")["level"]);					
 			}
-		}
-		else
-		{
+		}else{
 			$sign=$event->getPlayer()->getLevel()->getTile($event->getBlock());
-			if(isset($this->lastpos) && $this->lastpos!=array() && $sign instanceof Sign && $sign->getX()==$this->sign->x && $sign->getY()==$this->sign->y && $sign->getZ()==$this->sign->z && $event->getPlayer()->getLevel()->getFolderName()==$this->config->get("sign")["level"])
-			{
-				if(!$this->config->exists("lastpos"))
-				{
+			if(isset($this->lastpos) && $this->lastpos!=array() && $sign instanceof Sign && $sign->getX()==$this->sign->x && $sign->getY()==$this->sign->y && $sign->getZ()==$this->sign->z && $event->getPlayer()->getLevel()->getFolderName()==$this->config->get("sign")["level"]){
+				if(!$this->config->exists("lastpos")){
 					$event->getPlayer()->sendMessage("The game hasn't been set yet.");
 					return;
 				}
-				if(!$event->getPlayer()->hasPermission("FSurvivalGame.touch.startgame"))
-				{
+				if(!$event->getPlayer()->hasPermission("FSurvivalGame.touch.startgame")){
 					$event->getPlayer()->sendMessage("You don't have permission to join this game.");
 					return;
 				}
-				if(!$event->getPlayer()->isOp())
-				{
+				if(!$event->getPlayer()->isOp()){
 					$inv=$event->getPlayer()->getInventory();
-					for($i = 0; $i < $inv->getSize(); $i++)
-    				{
-    					if($inv->getItem($i)->getID() != 0)
-    					{
+					for($i = 0; $i < $inv->getSize(); $i++){
+    					if($inv->getItem($i)->getID() != 0){
     						$event->getPlayer()->sendMessage("Remove all items from your inventory to join match.");
     						return;
     					}
     				}
-    				foreach($inv->getArmorContents() as $i)
-    				{
-    					if($i->getID() != 0)
-    					{
+    				foreach($inv->getArmorContents() as $i){
+    					if($i->getID() != 0){
     						$event->getPlayer()->sendMessage("Please take your armor off.");
     						return;
     					}
     				}
     			}
-				if($this->gameStatus == 0 || $this->gameStatus == 1)
-				{
-					if(!isset($this->players[$event->getPlayer()->getName()]))
-					{
-						if(count($this->players) >= 6)
-						{
+				if($this->gameStatus == 0 || $this->gameStatus == 1){
+					if(!isset($this->players[$event->getPlayer()->getName()])){
+						if(count($this->players) >= 6){
 							$event->getPlayer()->sendMessage("The match is full.");
 							return;
 						}
 						$this->sendToAll("" .$event->getPlayer()->getName(). " joined the match.");
 						$this->players[$event->getPlayer()->getName()]=array("id"=>$event->getPlayer()->getName());
 						$event->getPlayer()->sendMessage("You have joined the match!");
-						if($this->gameStatus == 0 && count($this->players) >= 2)
-						{
+						if($this->gameStatus == 0 && count($this->players) >= 2){
 							$this->gameStatus = 1;
 							$this->lastTime = $this->waitTime;
 							$this->sendToAll("The game will countdown when a low amount of players are in");
 						}
-						if(count($this->players) == 8 && $this->gameStatus == 1 && $this->lastTime > 5)
-						{
+						if(count($this->players) == 8 && $this->gameStatus == 1 && $this->lastTime > 5){
 							$this->sendToAll("The match is already full. Starting the match.");
 							$this->lastTime = 5;
 						}
 						$this->changeStatusSign();
-					}
-					else
-					{
+					}else{
 						$event->getPlayer()->sendMessage("You are already in the game. Do /lobby to leave.");
 					}
-				}
-				else
-				{
+				}else{
 					$event->getPlayer()->sendMessage("The match has already started.");
 				}
 			}
 		}
 	}
 	
-	public function ClearInv($player)
-	{
-		if(!$player instanceof Player)
-		{
+	public function ClearInv($player){
+		if(!$player instanceof Player){
 			unset($player);
 			return;
 		}
 		$inv=$player->getInventory();
-		if(!$inv instanceof Inventory)
-		{
+		if(!$inv instanceof Inventory){
 			unset($player,$inv);
 			return;
 		}
@@ -1285,13 +1097,10 @@ class Main extends PluginBase implements Listener{
 		unset($player,$inv);
 	}
 	
-	public function ClearAllInv()
-	{
-		foreach($this->players as $pl)
-		{
+	public function ClearAllInv(){
+		foreach($this->players as $pl){
 			$player = $this->getServer()->getPlayer($pl["id"]);
-			if(!$player instanceof Player)
-			{
+			if(!$player instanceof Player){
 				continue;
 			}
 			$this->ClearInv($player);
@@ -1300,24 +1109,15 @@ class Main extends PluginBase implements Listener{
 	}
 	
 	public function PlayerQuit(PlayerQuitEvent $event){
-		if(isset($this->players[$event->getPlayer()->getName()]))
-		{	
+		if(isset($this->players[$event->getPlayer()->getName()])){	
 			unset($this->players[$event->getPlayer()->getName()]);
 			$this->ClearInv($event->getPlayer());
 			$this->sendToAll("".$event->getPlayer()->getName()." left the match.");
 			$this->changeStatusSign();
-			if($this->gameStatus == 1 && count($this->players) < 2)
-			{
+			if($this->gameStatus == 1 && count($this->players) < 2){
 				$this->gameStatus = 0;
 				$this->lastTime = 0;
 				$this->sendToAll("There aren't enough players. Countdown has stopped.");
-				/*foreach($this->players as $pl)
-				{
-					$p=$this->getServer()->getPlayer($pl["id"]);
-					$p->setLevel($this->signlevel);
-					$p->teleport($this->signlevel->getSpawnLocation());
-					unset($p,$pl);
-				}*/
 			}
 		}
 	}
@@ -1326,4 +1126,3 @@ class Main extends PluginBase implements Listener{
 		// Soon
 	}
 }
-?>
