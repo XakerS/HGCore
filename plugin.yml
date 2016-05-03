@@ -1,6 +1,6 @@
 name: HungerGames
 main: HG\Main
-version: "1.2"
+version: "1.0"
 api: [2.0.0]
 load: POSTWORLD
 author: WAV UnCraft
