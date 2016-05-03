@@ -36,12 +36,11 @@ use killrate\Main as KillRate;
 use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\event\player\PlayerMoveEvent;
 
-class Main extends PluginBase implements Listener
-{
+class Main extends PluginBase implements Listener{
 	
-	private static $obj = null;
-	public static function getInstance()
-	{
+	private $obj = null;
+	
+	public function getInstance(){
 		return self::$obj;
 	}
 	public function onEnable()
