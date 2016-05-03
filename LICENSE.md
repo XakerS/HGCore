@@ -1,27 +1,27 @@
 WUHGCore License Agreement
-This software license agreement ("Agreement") is a legal agreement between you (either an individual or an entity, "You" or "Your") and XenForo Limited ( "We", "Our" or "Us") for the use of XenForo software (“Software”) and any services that may be provided. XenForo Limited reserves the right to modify the terms of this Agreement at any time.
+This software license agreement ("Agreement") is a legal agreement between you (either an individual or an entity, "You" or "Your") WAV UnCraft ( "We", "Our" or "Us") for the use of WUHGCore (“Plugin”) and any services that may be provided. reserves the right to modify the terms of this Agreement at any time.
 
-By purchasing the Software (or authorizing any other person to do so) You warrant that you are capable of entering into a binding legal agreement, that You have read and understand this Agreement and that You accept its terms and conditions. You acknowledge that this Agreement constitutes the complete statement of the agreement between You and XenForo Limited.
+By purchasing the Software (or authorizing any other person to do so) You warrant that you are capable of entering into a binding legal agreement, that You have read and understand this Agreement and that You accept its terms and conditions. You acknowledge that this Agreement constitutes the complete statement of the agreement between You and WAV UnCraft.
 
 1. Grant and Scope of License
 
-Subject to the terms and conditions of this Agreement and the payment by You of the applicable fee for the Software, XenForo Limited grants You a limited, non-exclusive, worldwide license to install, download and use a single instance of the Software ("License") through a single installation. Each License may run one instance of the Software, accessible via one URL. Any attempt to circumvent this limitation is prohibited and will result in the License being revoked.
+Subject to the terms and conditions of this Agreement and the payment by You of the applicable fee for the Software, WAV UnCraft grants You a limited, non-exclusive, worldwide license to install, download and use a single instance of the Software ("License") through a single installation. Each License may run one instance of the Software, accessible via one URL. Any attempt to circumvent this limitation is prohibited and will result in the License being revoked.
 
 Before deploying the Software, you must register in the XenForo.com customer area the address (URL) at which You will use the License. This URL must be kept up-to-date. You may create a single additional test installation for the purpose of testing the Software. Any test installation of this kind must be password protected, and access to it must be limited to You and Your website staff.
 
 2. Rights
 
-The Software is licensed to You for use only under the terms and conditions of the License. You acknowledge that all intellectual property rights, copyrights and trademarks in the Software belong to XenForo Limited, that rights in the Software are licensed (not sold) to You, and that You have no rights in, or to, the Software other than the right to use them in accordance with the terms of this Agreement.
+The Software is licensed to You for use only under the terms and conditions of the License. You acknowledge that all intellectual property rights, copyrights and trademarks in the Software belong to WAV UnCraft, that rights in the Software are licensed (not sold) to You, and that You have no rights in, or to, the Software other than the right to use them in accordance with the terms of this Agreement.
 
-All copies of the Software must contain the same proprietary notices that appear on and in the Software, including all copyright notices embedded in the Software, which must remain unaltered from the original and visible at all times, unless by specific prior arrangement with XenForo Limited.
+All copies of the Software must contain the same proprietary notices that appear on and in the Software, including all copyright notices embedded in the Software, which must remain unaltered from the original and visible at all times, unless by specific prior arrangement with WAV UnCraft.
 
 The Software may be permanently transferred by the original purchaser to a third party ("Subsequent Licensee") not before 120 days following purchase, provided that the expiry date of the License falls after the date of the transfer. The original licensee may not retain a copy or installation of the Software. The Subsequent Licensee must agree to the terms of this Agreement and waive the right to transfer.
 
 3. Restrictions
 
-This license is granted to You alone. You may not redistribute the Software in whole or in part. You may not rent, lease, sub-license, sell, assign, pledge, transfer or otherwise dispose of the Software in any form, on a temporary or permanent basis, without the prior written consent of XenForo Limited.
+This license is granted to You alone. You may not redistribute the Software in whole or in part. You may not rent, lease, sub-license, sell, assign, pledge, transfer or otherwise dispose of the Software in any form, on a temporary or permanent basis, without the prior written consent of WAV UnCraft.
 
-For the avoidance of doubt, You are solely responsible for managing content posted using your installation of the Software (“Your Content”). XenForo Limited shall have no liability in respect of Your Content including but not limited to its accuracy or lawfulness.
+For the avoidance of doubt, You are solely responsible for managing content posted using your installation of the Software (“Your Content”). WAV UnCraft shall have no liability in respect of Your Content including but not limited to its accuracy or lawfulness.
 
 You are solely responsible for ensuring that Your Content and Your use of the Software complies with all applicable legislation and regulations, including but not limited to all applicable Data Protection and Privacy legislation. You undertake to ensure that the Software is not used by You or others to engage in illegal activity. You may not use the software to engage in any activity that would violate the rights of third parties. You hereby agree to indemnify Us from any loss or damage arising from Your breach of this provision.
 
@@ -29,13 +29,13 @@ You are solely responsible for ensuring that Your Content and Your use of the So
 
 The License for the Software is effective until terminated. You may terminate the License at any time by uninstalling the Software and destroying all copies of the Software.
 
-XenForo Limited reserves the right to revoke Your License to use the Software should any of the terms of this Agreement be violated.
+WAV UnCraft reserves the right to revoke Your License to use the Software should any of the terms of this Agreement be violated.
 
 5. Customer Data
 
-It is Your responsibility to ensure that you provide XenForo Limited with accurate, complete and current contact information. A failure to do so may result in Your inability to access updates and services.
+It is Your responsibility to ensure that you provide WAV UnCraft with accurate, complete and current contact information. A failure to do so may result in Your inability to access updates and services.
 
-You must maintain the confidentiality and security of your customer credentials that allow You to access the XenForo.com customer area. Any communication received by XenForo Limited through the customer area shall be assumed to have originated from You or an agent acting on your behalf.
+You must maintain the confidentiality and security of your customer credentials that allow You to access the XenForo.com customer area. Any communication received by WAV UnCraft through the customer area shall be assumed to have originated from You or an agent acting on your behalf.
 
 6. Support
 
@@ -71,7 +71,7 @@ This Agreement sets out the full extent of Your obligations and liabilities in r
 
 10. Indemnification
 
-You agree to indemnify, defend, and hold harmless XenForo Limited and its officers, directors, agents, and employees from and against any and all demands, claims, losses and liabilities, including reasonable attorney's fees, arising out of or caused by Your or Your visitors’ use of the Software. This obligation shall survive the termination of this Agreement.
+You agree to indemnify, defend, and hold harmless WAV UnCraft and its officers, directors, agents, and employees from and against any and all demands, claims, losses and liabilities, including reasonable attorney's fees, arising out of or caused by Your or Your visitors’ use of the Software. This obligation shall survive the termination of this Agreement.
 
 11. Refund Policy
 
