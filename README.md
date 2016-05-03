@@ -1,4 +1,4 @@
-# HGCore
+# WUHGCore
 
 Commands:
 /hg <set | remove>
