@@ -1,9 +1,9 @@
 name: HungerGames
 main: HG\Main
 version: "1.2"
-api: [1.0.0]
+api: [2.0.0]
 load: POSTWORLD
-author: a k i d
+author: WAV UnCraft
 commands:
  hg:
   permission: hg.command.hg
