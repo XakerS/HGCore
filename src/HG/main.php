@@ -1,6 +1,5 @@
 <?php
 namespace HG;
-
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 use pocketmine\command\Command;
@@ -35,10 +34,9 @@ use ResetChest\Main as ResetChest;
 use killrate\Main as KillRate;
 use pocketmine\event\player\PlayerRespawnEvent;
 use pocketmine\event\player\PlayerMoveEvent;
-
 class Main extends PluginBase implements Listener{
 	
-	private $obj = null;
+	private static $obj = null;
 	
 	public function getInstance(){
 		return self::$obj;
@@ -51,7 +49,7 @@ class Main extends PluginBase implements Listener{
 		}
 		$this->getServer()->getPluginManager()->registerEvents($this,$this);
 		$this->getServer()->getScheduler()->scheduleRepeatingTask(new CallbackTask([$this,"gameTimber"]),20);
-		$this->getServer()->getScheduler()->scheduleRepeatingTask(new CallbackTask([$this,"onJoin"]),10);
+		//$this->getServer()->getScheduler()->scheduleRepeatingTask(new CallbackTask([$this,"onJoin"]),10);
 		@mkdir($this->getDataFolder(), 0777, true);
 		$this->points = new Config($this->getDataFolder()."points.yml", Config::YAML);
 		$this->config = new Config($this->getDataFolder() . "config.yml", Config::YAML, array());
@@ -138,6 +136,7 @@ class Main extends PluginBase implements Listener{
 		$this->SetStatus = array();
 		$this->all = 0;
 		$this->config->save();
+		$pm = $this->getServer()->getPluginManager();
 		if(!($this->money = $pm->getPlugin("EconomyAPI")) && !($this->money = $pm->getPlugin("PocketMoney"))){
 			$this->getServer()->getLogger()->info(TextFormat::RED. "[HG] Please install EconomyAPI or PocketMoney for this to work!");
 		}else{
