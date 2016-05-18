@@ -1126,7 +1126,9 @@ class Main extends PluginBase implements Listener{
 	}
 	
 	public function sendToAll($message){
-		Server::broadcastMessage($message);
+		foreach($this->getServer()->getOnlinePlayers as $players){
+			$players->sendMessage($message);
+		}
 	}
 	
 	public function onDisable(){
