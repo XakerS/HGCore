@@ -1126,7 +1126,7 @@ class Main extends PluginBase implements Listener{
 	}
 	
 	public function sendToAll($message){
-		foreach($this->getServer()->getOnlinePlayers as $players){
+		foreach($this->getServer()->getOnlinePlayers() as $players){
 			$players->sendMessage($message);
 		}
 	}
