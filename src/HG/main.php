@@ -151,6 +151,7 @@ class Main extends PluginBase implements Listener{
 				$sender->sendMessage("The game has already started. You cannot go back to the lobby.");
 				return;
 			}
+			/*
 			if(isset($this->players[$sender->getName()])){	
 				unset($this->players[$sender->getName()]);
 				$sender->setLevel($this->signlevel);
@@ -162,22 +163,24 @@ class Main extends PluginBase implements Listener{
 					$this->gameStatus=0;
 					$this->lastTime=0;
 					$this->sendToAll("There aren't enough players. Countdown was stopped.");
-					/*foreach($this->players as $pl)
+					foreach($this->players as $pl)
 					{
 						$p=$this->getServer()->getPlayer($pl["id"]);
 						$p->setLevel($this->signlevel);
 						$p->teleport($this->signlevel->getSpawnLocation());
 						unset($p,$pl);
-					}*/
+					}
 				}
 			}else{
 				$sender->sendMessage(TextFormat::RED . "You are not in a match.");
 			}
 			return true;
+			*/
 		}
 		if(!isset($args[0])){
 			unset($sender,$cmd,$label,$args);
 			return false;};
+		if($sender instanceof Player){
 		switch ($args[0]){
 		case "stats":
 			if($sender->hasPermission("hg.command.stats") or $sender->hasPermission("hg.command") or $sender->hasPermission("hg")){
@@ -303,6 +306,7 @@ class Main extends PluginBase implements Listener{
 		default:
 			return false;
 			break;
+		}
 		}
 		return true;
 	}
@@ -1119,6 +1123,10 @@ class Main extends PluginBase implements Listener{
 				$this->sendToAll("There aren't enough players. Countdown has stopped.");
 			}
 		}
+	}
+	
+	public function sendToAll($message){
+		Server::broadcastMessage($message);
 	}
 	
 	public function onDisable(){
