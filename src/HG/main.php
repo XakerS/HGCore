@@ -146,10 +146,14 @@ class Main extends PluginBase implements Listener{
 	}
 	
 	public function onCommand(CommandSender $sender, Command $command, $label, array $args){
-		if($command->getName()=="lobby" or "hub" ){
+		if(strtolower($command->getName()) == "lobby"){
 			if($this->gameStatus>=2){
 				$sender->sendMessage("The game has already started. You cannot go back to the lobby.");
 				return;
+			} else {
+				$sender->teleport($this->getServer()->getDefaultLevel()->getSpawn());
+				unset($this->players[$sender->getName()]);
+				$sender->sendMessage("You have been teleported to spawn");
 			}
 			/*
 			if(isset($this->players[$sender->getName()])){	
