@@ -356,12 +356,8 @@ class Main extends PluginBase implements Listener{
 			if(!$event->getPlayer()->isOp())
 			{
 				$event->setCancelled();
-				$player = $event->getPlayer();
-				$from = $event->getFrom();
- 
-				if ($from->getZ() != $event->getTo()->getZ() && $from->getX() != $event->getTo()->getX()) {
-					$player->teleport($event->getFrom());
-				}
+			}
+		}
 		unset($event);
 	}
 	public function onBreak(BlockBreakEvent $event)
