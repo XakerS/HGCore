@@ -357,6 +357,10 @@ class Main extends PluginBase implements Listener{
 			{
 				$event->setCancelled();
 			}
+			$to = clone $event->getFrom();
+			$to->yaw = $event->getTo()->yaw;
+			$to->pitch = $event->getTo()->pitch;
+			$event->setTo($to);
 		}
 		unset($event);
 	}
