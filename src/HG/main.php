@@ -293,7 +293,7 @@ class Main extends PluginBase implements Listener{
 				$this->config->set("prefix","[Prefix here]");
 			}
 			if(!$this->config->exists("waitTime")){
-				$this->config->set("waitTime",180);
+				$this->config->set("waitTime",60);
 			}
 			$this->endTime = (int)$this->config->get("endTime");
 			$this->gameTime = (int)$this->config->get("gameTime");
