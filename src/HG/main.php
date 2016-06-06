@@ -439,6 +439,13 @@ class Main extends PluginBase implements Listener{
 	}
 	public function sendTip($msg){
 		foreach($this->players as $pl){
+			$this->getServer()->getPlayer($pl["id"])->sendTip($msg);
+		}
+		$this->getServer()->getLogger()->info($msg);
+		unset($pl,$msg);
+	}
+	public function sendPopup($msg){
+		foreach($this->players as $pl){
 			$this->getServer()->getPlayer($pl["id"])->sendPopup($msg);
 		}
 		$this->getServer()->getLogger()->info($msg);
@@ -490,21 +497,27 @@ class Main extends PluginBase implements Listener{
 				break;	
 			case 10:
 				$this->sendToAll(TextFormat::YELLOW."The match will start in 0:10.");
+				$this->sendPopup(TextFormat::YELLOW."The match will start in 0:10.");
 				break;
 			case 30:
 				$this->sendToAll(TextFormat::YELLOW."The match will start in 0:30.");
+				$this->sendPopup(TextFormat::YELLOW."The match will start in 0:30.");
 				break;
 			case 60:
 				$this->sendToAll(TextFormat::YELLOW."The match will start in 1:00.");
+				$this->sendPopup(TextFormat::YELLOW."The match will start in 1:00.");
 				break;
 			case 90:
 				$this->sendToAll(TextFormat::YELLOW."The match will start in 1:30.");
+				$this->sendPopup(TextFormat::YELLOW."The match will start in 1:30.");
 				break;
 			case 120:
 				$this->sendToAll(TextFormat::YELLOW."The match will start in 2:00.");
+				$this->sendPopup(TextFormat::YELLOW."The match will start in 2:00.");
 				break;
 			case 150:
 				$this->sendToAll(TextFormat::YELLOW."The match will start in 2:30.");
+				$this->sendPopup(TextFormat::YELLOW."The match will start in 2:30.");
 				break;
 			case 0:
 				$this->gameStatus = 2;
