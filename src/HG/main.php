@@ -112,7 +112,7 @@ class Main extends PluginBase implements Listener{
 		}
 		if(!$this->config->exists("endTime"))
 		{
-			$this->config->set("endTime",180);
+			$this->config->set("endTime",60);
 		}
 		if(!$this->config->exists("gameTime"))
 		{
@@ -124,7 +124,7 @@ class Main extends PluginBase implements Listener{
 		}
 		if(!$this->config->exists("waitTime"))
 		{
-			$this->config->set("waitTime",180);
+			$this->config->set("waitTime",60);
 		}
 		$this->endTime = (int)$this->config->get("endTime");
 		$this->gameTime = (int)$this->config->get("gameTime");
